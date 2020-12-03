@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block body_block %}
+{% load staticfiles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="{% static 'image/shop.jpg' %}" class="d-block w-100" alt="..." height="500">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'image/shp1.jpg' %}" class="d-block w-100" alt="..." height="500">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'image/shp2.jpg' %}" class="d-block w-100" alt="..." height="500">
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="d-flex flex-grow-1">
+        <form class="mr-2 my-auto w-100 d-inline-block order-1" action="/search/">
+            <div class="input-group">
+                <input type="text" class="form-control border border-right-0" placeholder="Please Enter The Search Content" name="q">
+                <span class="input-group-append">
+                    <button class="btn btn-outline-light border border-left-0" type="button">
+                        <!-- <i class="fa fa-search"></i> -->
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <button class="navbar-toggler order-0" type="button" data-toggle="collapse" data-target="#navbar7">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse flex-shrink-1 flex-grow-0 order-last" id="navbar7">
+        <ul class="navbar-nav">
+            ..
+        </ul>
+    </div>
+</nav>
+
+<h1>Product List</h1>
+
+<div class="container">
+<div class="row">
+  {% for prod in p %}
+  <div class="col-sm-4">
+  <div class="card" style="width: 18rem;">
+    {% if prod.prodimage %}
+  <img src="{{prod.prodimage.url}}/" class="card-img-top" alt="...">
+  {% endif %}
+  <div class="card-body">
+    <h4 class="card-text">{{prod.prodname|truncatechars:15}}</h4>
+    <h5 class="card-text"><i class="fa fa-inr" style="font-size:15px;"></i>{{prod.prodprice}}</h5>
+    <a href="/show/{{ prod.id }}" class="btn btn-lg btn-primary">Go to Cart</a>
+  </div>
+</div>
+    
+  </div>
+  {% endfor %}
+  </div>
+</div>
+		
+	
+{% endblock %}
